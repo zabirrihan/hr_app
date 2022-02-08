@@ -32,3 +32,21 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/fonts/
+
+  fonts:
+    - family: Monrope
+      fonts:
+        - asset: assets/fonts/EncodeSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/EncodeSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/EncodeSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/EncodeSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/EncodeSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/EncodeSans-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/EncodeSans-ExtraLight.ttf
+          weight: 200

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
+  static const String fontFaomily = "EncodeSans";
   static const Color grey = Colors.grey;
   static const Color white = Colors.white;
   static const Color red = Colors.red;

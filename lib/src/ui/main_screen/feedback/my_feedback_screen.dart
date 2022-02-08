@@ -21,16 +21,25 @@ class _MyFeedbackScreenState extends State<MyFeedbackScreen> {
       appBar: PreferredSize(
         preferredSize: Size.zero,
         child: AppBar(
-          backgroundColor: Color(0xFFF5F5F5),
-          elevation: 0,
+          backgroundColor: const Color(0xFFF5F5F5),
+          elevation: 1,
         ),
       ),
       body: Column(
         children: [
           Container(
-            height: 56,
+            height: 56 * h,
             width: MediaQuery.of(context).size.width,
-            color: Color(0xFFF5F5F5),
+            decoration: const BoxDecoration(
+              color: Color(0xFFF5F5F5),
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 1),
+                  blurRadius: 8,
+                  color: Color.fromRGBO(0, 0, 0, 0.3),
+                ),
+              ],
+            ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -42,8 +51,8 @@ class _MyFeedbackScreenState extends State<MyFeedbackScreen> {
                     color: Colors.transparent,
                     child: Row(
                       children: [
-                        const SizedBox(
-                          width: 16,
+                        SizedBox(
+                          width: 16 * w,
                         ),
                         const Icon(
                           Icons.arrow_back_ios_rounded,
@@ -52,105 +61,106 @@ class _MyFeedbackScreenState extends State<MyFeedbackScreen> {
                         Text(
                           "Back",
                           style: Utils.style(
-                              18, 24, AppTheme.blue, FontWeight.bold),
+                              18 * h, 24, AppTheme.blue, FontWeight.bold),
                         )
                       ],
                     ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   "My Feedback",
                   style: Utils.style(22, 26, AppTheme.black, FontWeight.bold),
                 ),
                 SizedBox(
-                  width: 54,
+                  width: 54 * h,
                 ),
-                Spacer(),
+                const Spacer(),
               ],
             ),
           ),
           SizedBox(
-            height: 24,
+            height: 24 * h,
           ),
           Container(
-            margin: EdgeInsets.only(left: 16, right: 48),
+            margin: EdgeInsets.only(left: 16 * w, right: 48 * w),
             color: Colors.transparent,
             child: Text(
               "Give use your valuable opinion",
-              style: Utils.style(32, 36, AppTheme.black, FontWeight.bold),
+              style: Utils.style(28 * h, 36, AppTheme.black, FontWeight.w500),
             ),
           ),
           SizedBox(
-            height: 24,
+            height: 24 * h,
           ),
           Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 8 * w, vertical: 4 * h),
-            margin: EdgeInsets.symmetric(horizontal: 16),
+            margin: EdgeInsets.symmetric(horizontal: 16 * h),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                width: 2,
+                width: 1,
                 color: AppTheme.black.withOpacity(0.3),
               ),
             ),
             child: TextFormField(
               controller: _nameController,
-              style: Utils.style(16, 20, Colors.black, FontWeight.normal),
+              style: Utils.style(16 * h, 20, Colors.black, FontWeight.w400),
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: "Feedback subject",
                 hintStyle: Utils.style(
-                    16, 20, Colors.black.withOpacity(0.3), FontWeight.normal),
+                    16 * h, 20, Colors.black.withOpacity(0.3), FontWeight.w400),
               ),
             ),
           ),
           SizedBox(
-            height: 24,
+            height: 24 * h,
           ),
           Container(
-            height: 150,
+            height: 150 * h,
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(horizontal: 8 * w, vertical: 4 * h),
-            margin: EdgeInsets.symmetric(horizontal: 16),
+            margin: EdgeInsets.symmetric(horizontal: 16 * h),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8 * h),
               border: Border.all(
-                width: 2,
+                width: 1,
                 color: AppTheme.black.withOpacity(0.3),
               ),
             ),
             child: TextFormField(
               controller: _titleController,
-              style: Utils.style(16, 20, Colors.black, FontWeight.normal),
+              style: Utils.style(16 * h, 20, Colors.black, FontWeight.w400),
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: "Type here deatils",
                 hintStyle: Utils.style(
-                    16, 20, Colors.black.withOpacity(0.3), FontWeight.bold),
+                    16 * h, 20, Colors.black.withOpacity(0.3), FontWeight.w400),
               ),
             ),
           ),
-          const SizedBox(
-            height: 24,
+          SizedBox(
+            height: 24 * h,
           ),
           GestureDetector(
             onTap: () {
               Navigator.pop(context);
             },
             child: Container(
-              height: 48,
+              height: 48 * h,
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.symmetric(horizontal: 32 * w),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8 * h),
                 color: AppTheme.blue,
               ),
               child: Center(
                 child: Text(
                   "SUBMIT",
-                  style: Utils.style(20, 24, AppTheme.white, FontWeight.bold),
+                  style:
+                      Utils.style(20 * h, 24, AppTheme.white, FontWeight.w400),
                 ),
               ),
             ),

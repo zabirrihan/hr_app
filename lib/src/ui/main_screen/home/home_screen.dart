@@ -11,20 +11,21 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    double h = Utils.windowHeight(context);
+    double w = Utils.windowWidth(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
           SizedBox(
-            height: 24,
+            height: 24 * h,
           ),
           Container(
-            height: 200,
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.all(16),
-            margin: EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.all(16 * h),
+            margin: EdgeInsets.symmetric(horizontal: 16 * w),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16 * h),
               color: Colors.blue,
             ),
             child: Column(
@@ -32,26 +33,30 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   children: [
                     Container(
-                      height: 60,
-                      width: 60,
+                      height: 60 * h,
+                      width: 60 * w,
+                      color: Colors.transparent,
                       child: Image.asset(
                         'assets/images/defoult_img.png',
                       ),
                     ),
                     SizedBox(
-                      width: 24,
+                      width: 16 * w,
                     ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Monarh Madaminov',
+                          textAlign: TextAlign.start,
                           style: Utils.style(
-                              22, 26, Colors.white, FontWeight.bold),
+                              22 * h, 26, Colors.white, FontWeight.bold),
                         ),
                         Text(
                           'Developer in Flutter',
+                          textAlign: TextAlign.start,
                           style: Utils.style(
-                              18, 22, Colors.white, FontWeight.normal),
+                              18 * h, 22, Colors.white, FontWeight.normal),
                         ),
                       ],
                     ),

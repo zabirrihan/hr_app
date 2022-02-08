@@ -1,6 +1,7 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hr_app/src/theme/app_theme.dart';
 import 'package:hr_app/src/ui/main_screen/feedback/feedback_screen.dart';
 import 'package:hr_app/src/ui/main_screen/holidays/holidays_screen.dart';
 import 'package:hr_app/src/ui/main_screen/home/home_screen.dart';
@@ -17,7 +18,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final PageController _controller = PageController(initialPage: 2);
-  int currentIndex = 0;
+  int currentIndex = 2;
   final List<Widget> _pages = [
     const NoticeScreen(),
     const MyLeaveScreen(),
@@ -28,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
 
   List<String> appTxt = [
     'Notice',
-    'MY LEAVES',
+    'My Leaves',
     'Home',
     'Feedback',
     'Govt. Holidays',
@@ -39,13 +40,13 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xFFF5F5F5),
-        elevation: 0,
+        backgroundColor: const Color(0xFFF5F5F5),
+        elevation: 1,
         title: Center(
           child: Text(
             appTxt[currentIndex],
             textAlign: TextAlign.center,
-            style: Utils.style(24, 28, Colors.black, FontWeight.w500),
+            style: Utils.style(20, 28, Colors.black, FontWeight.w500),
           ),
         ),
       ),
@@ -56,11 +57,13 @@ class _MainScreenState extends State<MainScreen> {
       ),
       bottomNavigationBar: ConvexAppBar(
         initialActiveIndex: 2,
-        style: TabStyle.react,
+        top: -16,
+        style: TabStyle.flip,
         backgroundColor: Colors.white,
-        color: Colors.blue,
+        color: AppTheme.grey,
         activeColor: Colors.blue,
-        elevation: 0,
+        curve: Curves.easeInOut,
+        elevation: 1,
         items: const [
           TabItem(icon: Icons.notifications, title: "Notice"),
           TabItem(icon: Icons.sync_disabled, title: "My Leave"),

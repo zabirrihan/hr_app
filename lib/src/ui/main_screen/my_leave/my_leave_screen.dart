@@ -26,33 +26,53 @@ class _MyLeaveScreenState extends State<MyLeaveScreen>
   @override
   Widget build(BuildContext context) {
     double h = Utils.windowHeight(context);
-    double w = Utils.windowWidth(context);
     return Scaffold(
       body: Column(
         children: [
           Container(
             height: 50 * h,
-            color: const Color(0xFFF5F5F5),
+            decoration: const BoxDecoration(
+              color: Color(0xFFF5F5F5),
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 1),
+                  blurRadius: 8,
+                  color: Color.fromRGBO(0, 0, 0, 0.3),
+                )
+              ],
+            ),
             child: TabBar(
               tabs: [
                 Tab(
                   child: Text(
-                    'BALANCE',
-                    style:
-                        Utils.style(18, 24, AppTheme.blue, FontWeight.normal),
+                    'Balance',
+                    style: TextStyle(
+                      fontSize: 14 * h,
+                      height: 18 / 14 * h,
+                      fontFamily: AppTheme.fontFaomily,
+                      fontWeight: FontWeight.w500,
+                      fontStyle: FontStyle.normal,
+                    ),
                   ),
                 ),
                 Tab(
                   child: Text(
-                    'LEAVES',
-                    style:
-                        Utils.style(18, 24, AppTheme.blue, FontWeight.normal),
+                    'Leaves',
+                    style: TextStyle(
+                      fontSize: 14 * h,
+                      height: 18 / 14 * h,
+                      fontFamily: AppTheme.fontFaomily,
+                      fontWeight: FontWeight.w500,
+                      fontStyle: FontStyle.normal,
+                    ),
                   ),
                 ),
               ],
               controller: _tabController,
               indicatorSize: TabBarIndicatorSize.tab,
-              indicatorWeight: 5,
+              indicatorWeight: 3 * h,
+              unselectedLabelColor: AppTheme.grey,
+              labelColor: AppTheme.blue,
             ),
           ),
           Expanded(
@@ -93,14 +113,12 @@ class _MyLeaveScreenState extends State<MyLeaveScreen>
             ),
           );
         },
-        elevation: 10,
-        backgroundColor: Colors.transparent,
         child: Container(
           height: 50,
           width: 50,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
-            color: Colors.orange,
+            color: AppTheme.blue,
           ),
           child: Center(
             child: Text(

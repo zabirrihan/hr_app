@@ -13,7 +13,6 @@ class LeaveWidget {
     String leave,
   ) {
     double h = Utils.windowHeight(context);
-    double w = Utils.windowWidth(context);
     return ListView(
       children: [
         SizedBox(
@@ -28,14 +27,8 @@ class LeaveWidget {
           "sick",
           "leave",
         ),
-        balanceItem(
-          context,
-          'Opening Balance 2022',
-          "96 Days",
-          "56 Days",
-          "privilege",
-          "sick",
-          "leave",
+        SizedBox(
+          height: 8 * h,
         ),
         balanceItem(
           context,
@@ -45,6 +38,21 @@ class LeaveWidget {
           "privilege",
           "sick",
           "leave",
+        ),
+        SizedBox(
+          height: 8 * h,
+        ),
+        balanceItem(
+          context,
+          'Opening Balance 2022',
+          "96 Days",
+          "56 Days",
+          "privilege",
+          "sick",
+          "leave",
+        ),
+        SizedBox(
+          height: 8 * h,
         ),
         balanceItem(
           context,
@@ -69,7 +77,6 @@ class LeaveWidget {
     String leave,
   ) {
     double h = Utils.windowHeight(context);
-    double w = Utils.windowWidth(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -79,10 +86,10 @@ class LeaveWidget {
         Text(
           title,
           style: Utils.style(
-            28 * h,
-            36,
+            24 * h,
+            28,
             Colors.black,
-            FontWeight.bold,
+            FontWeight.w600,
           ),
         ),
         Row(
@@ -93,27 +100,27 @@ class LeaveWidget {
                   Text(
                     beginDay,
                     style: Utils.style(
-                      20 * h,
-                      24,
+                      16 * h,
+                      22,
                       AppTheme.blue,
-                      FontWeight.bold,
+                      FontWeight.w500,
                     ),
                   ),
                   SizedBox(
                     height: 8 * h,
                   ),
                   Text(
-                    privilege.toUpperCase(),
-                    style: Utils.style(20 * h, 20,
-                        Colors.black.withOpacity(0.3), FontWeight.normal),
+                    privilege,
+                    style: Utils.style(18 * h, 20,
+                        Colors.black.withOpacity(0.3), FontWeight.w300),
                   ),
                   SizedBox(
                     height: 8 * h,
                   ),
                   Text(
-                    leave.toUpperCase(),
-                    style: Utils.style(20 * h, 20,
-                        Colors.black.withOpacity(0.3), FontWeight.normal),
+                    leave,
+                    style: Utils.style(18 * h, 20,
+                        Colors.black.withOpacity(0.3), FontWeight.w300),
                   ),
                 ],
               ),
@@ -124,31 +131,27 @@ class LeaveWidget {
                   Text(
                     endDay,
                     style: Utils.style(
-                      20 * h,
-                      24,
+                      16 * h,
+                      22,
                       AppTheme.blue,
-                      FontWeight.bold,
+                      FontWeight.w500,
                     ),
                   ),
                   SizedBox(
                     height: 8 * h,
                   ),
                   Text(
-                    sick.toUpperCase(),
-                    style: Utils.style(
-                      20 * h,
-                      20,
-                      Colors.black.withOpacity(0.3),
-                      FontWeight.normal,
-                    ),
+                    sick,
+                    style: Utils.style(18 * h, 20,
+                        Colors.black.withOpacity(0.3), FontWeight.w300),
                   ),
                   SizedBox(
                     height: 8 * h,
                   ),
                   Text(
-                    leave.toUpperCase(),
-                    style: Utils.style(20 * h, 20,
-                        Colors.black.withOpacity(0.3), FontWeight.normal),
+                    leave,
+                    style: Utils.style(18 * h, 20,
+                        Colors.black.withOpacity(0.3), FontWeight.w300),
                   ),
                 ],
               ),
@@ -161,7 +164,7 @@ class LeaveWidget {
         Container(
           height: 2,
           width: MediaQuery.of(context).size.width,
-          color: Colors.grey,
+          color: Colors.grey.withOpacity(0.5),
         )
       ],
     );
@@ -195,6 +198,9 @@ class LeaveWidget {
           "Leave reason: Hey Bruce, what's going on? Did you figured it out with the buget? Still",
           Colors.blue,
         ),
+        SizedBox(
+          height: 8 * h,
+        ),
         leavesItem(
           context,
           title,
@@ -206,6 +212,9 @@ class LeaveWidget {
           "Leave reason: Hey Bruce, what's going on? Did you figured it out with the buget? Still",
           Colors.red,
         ),
+        SizedBox(
+          height: 8 * h,
+        ),
         leavesItem(
           context,
           title,
@@ -216,6 +225,9 @@ class LeaveWidget {
           link,
           "Leave reason: Hey Bruce, what's going on? Did you figured it out with the buget? Still",
           Colors.green,
+        ),
+        SizedBox(
+          height: 8 * h,
         ),
         leavesItem(
           context,
@@ -229,7 +241,7 @@ class LeaveWidget {
           Colors.yellow,
         ),
         SizedBox(
-          height: 150,
+          height: 150 * h,
         ),
       ],
     );
@@ -255,11 +267,11 @@ class LeaveWidget {
           width: 8 * w,
         ),
         Container(
-          height: 12,
-          width: 12,
-          margin: EdgeInsets.only(top: 24 * h),
+          height: 12 * h,
+          width: 12 * w,
+          margin: EdgeInsets.only(top: 12 * h),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12 * h),
             color: color,
           ),
         ),
@@ -278,8 +290,8 @@ class LeaveWidget {
                   Text(
                     title,
                     style: Utils.style(
-                      20 * h,
-                      36,
+                      18 * h,
+                      22,
                       Colors.black,
                       FontWeight.bold,
                     ),
@@ -288,10 +300,10 @@ class LeaveWidget {
                   Text(
                     startDay,
                     style: Utils.style(
-                      16 * h,
-                      36,
+                      14 * h,
+                      18,
                       Colors.black.withOpacity(0.5),
-                      FontWeight.bold,
+                      FontWeight.w500,
                     ),
                   ),
                   SizedBox(
@@ -305,15 +317,15 @@ class LeaveWidget {
                   beginDay,
                   maxLines: 2,
                   style: Utils.style(
-                    16 * h,
-                    24,
+                    14 * h,
+                    18,
                     AppTheme.black.withOpacity(0.5),
-                    FontWeight.bold,
+                    FontWeight.w500,
                   ),
                 ),
               ),
               SizedBox(
-                height: 8 * h,
+                height: 4 * h,
               ),
               Container(
                 padding:
@@ -325,7 +337,7 @@ class LeaveWidget {
                 child: Text(
                   link,
                   style: Utils.style(
-                    20 * h,
+                    16 * h,
                     24,
                     AppTheme.white,
                     FontWeight.bold,
@@ -333,7 +345,7 @@ class LeaveWidget {
                 ),
               ),
               SizedBox(
-                height: 8 * h,
+                height: 4 * h,
               ),
               Container(
                 margin: EdgeInsets.only(right: 8 * w),
@@ -341,9 +353,9 @@ class LeaveWidget {
                   content,
                   style: Utils.style(
                     16 * h,
-                    24,
+                    18,
                     AppTheme.black.withOpacity(0.7),
-                    FontWeight.bold,
+                    FontWeight.w300,
                   ),
                 ),
               ),
@@ -353,7 +365,7 @@ class LeaveWidget {
               Container(
                 height: 2,
                 width: MediaQuery.of(context).size.width,
-                color: Colors.grey,
+                color: Colors.grey.withOpacity(0.5),
               )
             ],
           ),
