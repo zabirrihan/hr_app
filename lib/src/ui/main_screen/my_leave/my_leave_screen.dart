@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hr_app/src/bloc/leaves_bloc.dart';
+import 'package:hr_app/src/model/leaves_model/balance_model.dart';
 import 'package:hr_app/src/theme/app_theme.dart';
 import 'package:hr_app/src/ui/main_screen/my_leave/new_leave_screen.dart';
 import 'package:hr_app/src/utils/utils.dart';
@@ -19,7 +21,7 @@ class _MyLeaveScreenState extends State<MyLeaveScreen>
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
-
+    balanceBloc.getBalance();
     super.initState();
   }
 
@@ -78,15 +80,24 @@ class _MyLeaveScreenState extends State<MyLeaveScreen>
           Expanded(
             child: TabBarView(
               children: <Widget>[
-                LeaveWidget.balanceWidget(
-                  context,
-                  'Opening Balance 2022',
-                  "96 Days",
-                  "56 Days",
-                  "privilege",
-                  "sick",
-                  "leave",
-                ),
+                StreamBuilder(
+                    stream: balanceBloc.getAllBalance,
+                    builder: (context, AsyncSnapshot<BalanceModel> snapshot) {
+                      if (snapshot.hasData) {
+                        BalanceModel? data = snapshot.data;
+                        return LeaveWidget.balanceWidget(
+                          context,
+                          data!.metaData.filterList.toString(),
+                          "96 Days",
+                          "56 Days",
+                          "privilege",
+                          "sick",
+                          "leave",
+                        );
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    }),
                 LeaveWidget.leavesWidget(
                   context,
                   "Leave type",
