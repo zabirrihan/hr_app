@@ -80,19 +80,14 @@ class _MyLeaveScreenState extends State<MyLeaveScreen>
           Expanded(
             child: TabBarView(
               children: <Widget>[
-                StreamBuilder(
+                StreamBuilder<BalanceModel>(
                     stream: balanceBloc.getAllBalance,
-                    builder: (context, AsyncSnapshot<BalanceModel> snapshot) {
+                    builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         BalanceModel? data = snapshot.data;
                         return LeaveWidget.balanceWidget(
                           context,
-                          data!.metaData.filterList.toString(),
-                          "96 Days",
-                          "56 Days",
-                          "privilege",
-                          "sick",
-                          "leave",
+                          data,
                         );
                       } else {
                         return CircularProgressIndicator();

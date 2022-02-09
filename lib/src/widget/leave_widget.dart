@@ -2,68 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:hr_app/src/theme/app_theme.dart';
 import 'package:hr_app/src/utils/utils.dart';
 
+import '../model/leaves_model/balance_model.dart';
+
 class LeaveWidget {
   static Widget balanceWidget(
     BuildContext context,
-    String title,
-    String beginDay,
-    String endDay,
-    String privilege,
-    String sick,
-    String leave,
+    BalanceModel data,
   ) {
     double h = Utils.windowHeight(context);
-    return ListView(
-      children: [
-        SizedBox(
-          height: 16 * h,
-        ),
-        balanceItem(
+    return ListView.builder(
+      itemCount: data.data.length,
+      itemBuilder: (context, index) {
+        var info = data.data[index];
+        return balanceItem(
           context,
-          'Opening Balance 2022',
-          "96 Days",
-          "56 Days",
-          "privilege",
-          "sick",
-          "leave",
-        ),
-        SizedBox(
-          height: 8 * h,
-        ),
-        balanceItem(
-          context,
-          'Opening Balance 2022',
-          "96 Days",
-          "56 Days",
-          "privilege",
-          "sick",
-          "leave",
-        ),
-        SizedBox(
-          height: 8 * h,
-        ),
-        balanceItem(
-          context,
-          'Opening Balance 2022',
-          "96 Days",
-          "56 Days",
-          "privilege",
-          "sick",
-          "leave",
-        ),
-        SizedBox(
-          height: 8 * h,
-        ),
-        balanceItem(
-          context,
-          'Opening Balance 2022',
-          "96 Days",
-          "56 Days",
-          "privilege",
-          "sick",
-          "leave",
-        ),
-      ],
+        );
+      },
     );
   }
 

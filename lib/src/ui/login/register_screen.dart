@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hr_app/src/api/repository.dart';
@@ -170,7 +168,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     HttpResult result = await _repository.loginApi(
                         _idController.text, _passwordController.text);
                     if (result.isSuccess) {
-                      var data = jsonDecode(result.result);
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -179,21 +176,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       );
                     } else {
                       showDialog(
-                          context: context,
-                          builder: (context) {
-                            return CupertinoAlertDialog(
-                              title: Text("Error"),
-                              content: Text(result.result),
-                              actions: [
-                                GestureDetector(
-                                  onTap: () => Navigator.pop(context),
-                                  child: Center(
-                                    child: Text('Ok'),
+                        context: context,
+                        builder: (context) {
+                          return CupertinoAlertDialog(
+                            title: const Text("Error"),
+                            content: Text(result.result),
+                            actions: [
+                              GestureDetector(
+                                onTap: () => Navigator.pop(context),
+                                child: const Center(
+                                  child: Text(
+                                    'Ok',
                                   ),
-                                )
-                              ],
-                            );
-                          });
+                                ),
+                              )
+                            ],
+                          );
+                        },
+                      );
                     }
                   },
                   child: Container(
