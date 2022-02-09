@@ -50,13 +50,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Monarh Madaminov',
                           textAlign: TextAlign.start,
                           style: Utils.style(
-                              22 * h, 26, Colors.white, FontWeight.bold),
+                              20 * h, 24, Colors.white, FontWeight.bold),
                         ),
                         Text(
                           'Developer in Flutter',
                           textAlign: TextAlign.start,
                           style: Utils.style(
-                              18 * h, 22, Colors.white, FontWeight.normal),
+                              16 * h, 20, Colors.white, FontWeight.normal),
                         ),
                       ],
                     ),

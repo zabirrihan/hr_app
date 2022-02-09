@@ -34,7 +34,7 @@ flutter:
     - assets/fonts/
 
   fonts:
-    - family: Monrope
+    - family: EncodeSans
       fonts:
         - asset: assets/fonts/EncodeSans-Light.ttf
           weight: 300
