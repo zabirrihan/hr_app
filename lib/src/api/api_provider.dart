@@ -9,9 +9,12 @@ class ApiProver {
   static Duration duration = const Duration(seconds: 30);
   String baseUrl = "";
   static Future<HttpResult> _postUrl(String url, data) async {
+    //ignore: avoid_print
     print(url);
+    //ignore: avoid_print
     print(data);
     var header = await _header();
+    //ignore: avoid_print
     print(header);
     try {
       http.Response response = await http
@@ -93,19 +96,34 @@ class ApiProver {
   static dynamic _header() async {
     return null;
   }
-
+  ///balance
   Future<HttpResult> getAllBalance() async {
     String url =
         "$baseUrl/leave/statusdata?empcode=00001";
     return _getResponse(url);
   }
+  ///feedback
+  Future<HttpResult> getAllFeedback() async {
+    String url =
+        "$baseUrl /get_feedback";
+    return _getResponse(url);
+  }
+
+  ///holiday
+  Future<HttpResult> getAllHoliday() async {
+    String url =
+        "$baseUrl/myleave/holidays?worklocation=All";
+    return _getResponse(url);
+  }
+
+  ///login
   Future<HttpResult> setLogin(String id, String password) async {
     var data = {
       "userid": id,
       "password": password,
     };
     return await _postUrl(
-      baseUrl + "authenticate/loginservice",
+      baseUrl + "/authenticate/loginservice",
       json.encode(data),
     );
 

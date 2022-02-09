@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hr_app/src/bloc/holiday_bloc.dart';
+import 'package:hr_app/src/model/holiday/holiday_model.dart';
 import 'package:hr_app/src/theme/app_theme.dart';
 import 'package:hr_app/src/utils/utils.dart';
 
@@ -14,26 +16,23 @@ class _HolidaysScreenState extends State<HolidaysScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
+      body: Column(
         children: [
-          holidayWidget(
-            context,
-            "Leave name - this could be two line long text or more",
-            "Head Office",
-            DateTime.now(),
-          ),
-          holidayWidget(
-            context,
-            "Leave name - this could be two line long text or more",
-            "ALL",
-            DateTime.now(),
-          ),
-          holidayWidget(
-            context,
-            "Leave name - this could be two line long text or more",
-            "ALl",
-            DateTime.now(),
-          ),
+          StreamBuilder(
+              stream: holidayBloc.getAllHoliday,
+              builder: (context, AsyncSnapshot<HolidayModel> snapshot) {
+                if (snapshot.hasData) {
+                  var data = snapshot.data;
+                  return holidayWidget(
+                    context,
+                    data!.holidaydate.toString(),
+                    data.remarks,
+                    data.holidaydate,
+                  );
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              }),
         ],
       ),
     );
@@ -41,7 +40,7 @@ class _HolidaysScreenState extends State<HolidaysScreen> {
 }
 
 Widget holidayWidget(
-    BuildContext context, String title, String name, DateTime dateTima) {
+    BuildContext context, String title, String name, DateTime dateTime) {
   double h = Utils.windowHeight(context);
   double w = Utils.windowWidth(context);
   return GestureDetector(
@@ -95,11 +94,11 @@ Widget holidayWidget(
           Row(
             children: [
               Text(
-                getDate(dateTima.month) +
+                getDate(dateTime.month) +
                     " " +
-                    dateTima.day.toString() +
+                    dateTime.day.toString() +
                     " " +
-                    dateTima.year.toString(),
+                    dateTime.year.toString(),
                 style: Utils.style(18 * h, 24, AppTheme.blue, FontWeight.w500),
               ),
               SizedBox(

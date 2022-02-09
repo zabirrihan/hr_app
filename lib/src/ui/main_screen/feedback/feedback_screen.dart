@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hr_app/src/bloc/feedback_bloc.dart';
+import 'package:hr_app/src/model/feedback_model/feedback_model.dart';
 import 'package:hr_app/src/theme/app_theme.dart';
 import 'package:hr_app/src/ui/main_screen/feedback/my_feedback_screen.dart';
 import 'package:hr_app/src/utils/utils.dart';
@@ -18,16 +20,28 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
       backgroundColor: AppTheme.white,
       body: Column(
         children: [
-          feedbackWidget(
-              context,
-              "here will show my feedback it will be maximum 500 charecter",
-              "Feedback title",
-              DateTime.now()),
-          feedbackWidget(
-              context,
-              "here will show my feedback it will be maximum 500 charecter",
-              "Feedback title",
-              DateTime.now()),
+          StreamBuilder(
+            stream: feedbackBloc.getAllFeedback,
+            builder: (context, AsyncSnapshot<FeedbackModel> snapshot) {
+              if (snapshot.hasData) {
+                var data = snapshot.data;
+                return ListView.builder(
+                  itemCount: data!.feedbackData.length,
+                  itemBuilder: (context, index) {
+                    var feekData = data.feedbackData;
+                    return feedbackWidget(
+                      context,
+                      feekData[index].feedbackDetails[index].message,
+                      feekData[index].feedbackDetails[index].message,
+                      feekData[index].feedbackDetails[index].entryDate,
+                    );
+                  },
+                );
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -79,7 +93,7 @@ Widget feedbackWidget(
                   Navigator.pop(context);
                 },
                 child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 8),
+                  margin: const EdgeInsets.symmetric(vertical: 8),
                   color: Colors.transparent,
                   child: Center(
                     child: Text(
@@ -121,7 +135,7 @@ Widget feedbackWidget(
             style: Utils.style(
                 18, 24, Colors.black.withOpacity(0.5), FontWeight.normal),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           Container(
