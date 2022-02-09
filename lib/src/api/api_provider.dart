@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:hr_app/src/model/http_result.dart';
 import 'package:http/http.dart' as http;
@@ -7,6 +8,36 @@ import 'package:http/http.dart' as http;
 class ApiProver {
   static Duration duration = const Duration(seconds: 30);
   String baseUrl = "";
+  static Future<HttpResult> _postUrl(String url, data) async {
+    print(url);
+    print(data);
+    var header = await _header();
+    print(header);
+    try {
+      http.Response response = await http
+          .post(
+        Uri.parse(url),
+        body: data,
+        headers: header,
+      )
+          .timeout(duration);
+      return _result(response);
+    } on TimeoutException catch (_) {
+      return HttpResult(
+        isSuccess: false,
+        statusCode: -1,
+        result: "",
+      );
+    } on SocketException catch (_) {
+      return HttpResult(
+        isSuccess: false,
+        statusCode: -1,
+        result: "",
+      );
+    }
+  }
+
+
   static Future<HttpResult> _getResponse(String url) async {
     // ignore: avoid_print
     print(url);
@@ -67,5 +98,16 @@ class ApiProver {
     String url =
         "$baseUrl/leave/statusdata?empcode=00001";
     return _getResponse(url);
+  }
+  Future<HttpResult> setLogin(String id, String password) async {
+    var data = {
+      "userid": id,
+      "password": password,
+    };
+    return await _postUrl(
+      baseUrl + "authenticate/loginservice",
+      json.encode(data),
+    );
+
   }
 }

@@ -6,6 +6,7 @@ class Repository {
   final apiProvider = ApiProver();
 
   Future<HttpResult> getAllBalance() => apiProvider.getAllBalance();
+  Future<HttpResult> loginApi(String id, String password) => apiProvider.setLogin(id, password);
 
 
 }

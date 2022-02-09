@@ -1,4 +1,9 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hr_app/src/api/repository.dart';
+import 'package:hr_app/src/model/http_result.dart';
 import 'package:hr_app/src/theme/app_theme.dart';
 import 'package:hr_app/src/ui/main_screen/main_screen.dart';
 import 'package:hr_app/src/utils/utils.dart';
@@ -13,6 +18,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _idController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final Repository _repository = Repository();
   bool passCheck = false;
   bool idIcon = false;
   bool passIcon = false;
@@ -160,13 +166,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 72 * h,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const MainScreen(),
-                      ),
-                    );
+                  onTap: () async {
+                    HttpResult result = await _repository.loginApi(
+                        _idController.text, _passwordController.text);
+                    if (result.isSuccess) {
+                      var data = jsonDecode(result.result);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MainScreen(),
+                        ),
+                      );
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CupertinoAlertDialog(
+                              title: Text("Error"),
+                              content: Text(result.result),
+                              actions: [
+                                GestureDetector(
+                                  onTap: () => Navigator.pop(context),
+                                  child: Center(
+                                    child: Text('Ok'),
+                                  ),
+                                )
+                              ],
+                            );
+                          });
+                    }
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
