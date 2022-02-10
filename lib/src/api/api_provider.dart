@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:hr_app/src/model/http_result.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,14 +18,21 @@ class ApiProver {
     //ignore: avoid_print
     print(header);
     try {
-      http.Response response = await http.post(
-        Uri.parse(url),
-        body: data,
-        encoding: Encoding.getByName("utf-8"),
-        headers: header
-      )
-          .timeout(duration);
-      return _result(response);
+      // http.Response response = await http.post(
+      //   Uri.parse(url),
+      //   body: data,
+      //   encoding: Encoding.getByName("utf-8"),
+      //   headers: header
+      // )
+      //     .timeout(duration);
+      var dio = Dio();
+      dio.interceptors.add(LogInterceptor(responseBody: false));
+      var formData = FormData.fromMap({
+        'userid': '05785',
+        'password': 'rifat'});
+      var response = await dio.post(url, data: formData);
+      print(response);
+      return _result(response.data);
     } on TimeoutException catch (_) {
       return HttpResult(
         isSuccess: false,
