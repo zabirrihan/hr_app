@@ -17,11 +17,11 @@ class ApiProver {
     //ignore: avoid_print
     print(header);
     try {
-      http.Response response = await http
-          .post(
+      http.Response response = await http.post(
         Uri.parse(url),
         body: data,
-        headers: header,
+        encoding: Encoding.getByName("utf-8"),
+        headers: header
       )
           .timeout(duration);
       return _result(response);
@@ -94,7 +94,7 @@ class ApiProver {
   }
 
   static dynamic _header() async {
-    Map<String, String> headers = {"Content-Type": "application/json"};
+    Map<String, String> headers = {"Accept": "application/json", "Content-Type": "application/form-data"};
     return headers;
   }
   ///balance
