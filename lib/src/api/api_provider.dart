@@ -94,7 +94,8 @@ class ApiProver {
   }
 
   static dynamic _header() async {
-    return null;
+    Map<String, String> headers = {"Content-Type": "application/json"};
+    return headers;
   }
   ///balance
   Future<HttpResult> getAllBalance() async {
@@ -123,7 +124,7 @@ class ApiProver {
       "password": password,
     };
     return await _postUrl(
-      baseUrl + "/authenticate/loginservice",
+      baseUrl + "/authenticate/loginservice2",
       json.encode(data),
     );
 
