@@ -180,7 +180,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         builder: (context) {
                           return CupertinoAlertDialog(
                             title: const Text("Error"),
-                            content: Text(result.result),
+                            content: Text(result.result.toString()),
                             actions: [
                               GestureDetector(
                                 onTap: () => Navigator.pop(context),

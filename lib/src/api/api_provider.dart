@@ -4,10 +4,12 @@ import 'dart:io';
 
 import 'package:hr_app/src/model/http_result.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiProver {
   static Duration duration = const Duration(seconds: 30);
-  String baseUrl = "";
+  String baseUrl = "https://apps.acibd.com/apps/hrmatters/";
+
   static Future<HttpResult> _postUrl(String url, data) async {
     print(url);
     print(data);
@@ -16,10 +18,10 @@ class ApiProver {
     try {
       http.Response response = await http
           .post(
-        Uri.parse(url),
-        body: data,
-        headers: header,
-      )
+            Uri.parse(url),
+            body: data,
+            headers: header,
+          )
           .timeout(duration);
       return _result(response);
     } on TimeoutException catch (_) {
@@ -37,16 +39,15 @@ class ApiProver {
     }
   }
 
-
   static Future<HttpResult> _getResponse(String url) async {
     // ignore: avoid_print
     print(url);
     try {
       http.Response response = await http
           .get(
-        Uri.parse(url),
-        headers: await _header(),
-      )
+            Uri.parse(url),
+            headers: await _header(),
+          )
           .timeout(duration);
       return _result(response);
     } on TimeoutException catch (_) {
@@ -95,10 +96,28 @@ class ApiProver {
   }
 
   Future<HttpResult> getAllBalance() async {
-    String url =
-        "$baseUrl/leave/statusdata?empcode=00001";
+    String url = baseUrl + "leave/statusdata?empcode=00001";
     return _getResponse(url);
   }
+
+  Future<HttpResult> getAllHoliday() async {
+    String url = baseUrl + "myleave/holidays?worklocation=All";
+    return _getResponse(url);
+  }
+
+  Future<HttpResult> getAllFeedback() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String id = prefs.getString("userid") ?? "0";
+    var data = {
+      "UserID": id,
+    };
+    String url = baseUrl + "get_feedback";
+    return await _postUrl(
+      url,
+      data,
+    );
+  }
+
   Future<HttpResult> setLogin(String id, String password) async {
     var data = {
       "userid": id,
@@ -106,8 +125,7 @@ class ApiProver {
     };
     return await _postUrl(
       baseUrl + "authenticate/loginservice",
-      json.encode(data),
+      data,
     );
-
   }
 }

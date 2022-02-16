@@ -16,6 +16,12 @@ class LeaveWidget {
         var info = data.data[index];
         return balanceItem(
           context,
+          data.data[0].indicator,
+          data.data[0].privilegeLeave,
+          data.data[0].privilegeLeave,
+          data.data[0].privilegeLeave,
+          data.data[0].privilegeLeave,
+          data.data[0].privilegeLeave,
         );
       },
     );

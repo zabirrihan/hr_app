@@ -81,18 +81,19 @@ class _MyLeaveScreenState extends State<MyLeaveScreen>
             child: TabBarView(
               children: <Widget>[
                 StreamBuilder<BalanceModel>(
-                    stream: balanceBloc.getAllBalance,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        BalanceModel? data = snapshot.data;
-                        return LeaveWidget.balanceWidget(
-                          context,
-                          data,
-                        );
-                      } else {
-                        return CircularProgressIndicator();
-                      }
-                    }),
+                  stream: balanceBloc.getAllBalance,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      BalanceModel? data = snapshot.data;
+                      return LeaveWidget.balanceWidget(
+                        context,
+                        data!,
+                      );
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  },
+                ),
                 LeaveWidget.leavesWidget(
                   context,
                   "Leave type",

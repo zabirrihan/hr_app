@@ -13,26 +13,38 @@ class HolidaysScreen extends StatefulWidget {
 }
 
 class _HolidaysScreenState extends State<HolidaysScreen> {
+
+  @override
+  void initState() {
+    holidayBloc.getHoliday();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          StreamBuilder(
-              stream: holidayBloc.getAllHoliday,
-              builder: (context, AsyncSnapshot<HolidayModel> snapshot) {
-                if (snapshot.hasData) {
-                  var data = snapshot.data;
-                  return holidayWidget(
-                    context,
-                    data!.holidaydate.toString(),
-                    data.remarks,
-                    data.holidaydate,
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              }),
+          StreamBuilder<List<HolidayModel>>(
+            stream: holidayBloc.getAllHoliday,
+            builder: (context, AsyncSnapshot<List<HolidayModel>> snapshot) {
+              if (snapshot.hasData) {
+                var data = snapshot.data;
+                return ListView.builder(
+                  itemCount: data!.length,
+                  itemBuilder: (_, index) {
+                    return holidayWidget(
+                      context,
+                      data[index].appto,
+                      data[index].remarks,
+                      data[index].holidaydate,
+                    );
+                  },
+                );
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
+          ),
         ],
       ),
     );

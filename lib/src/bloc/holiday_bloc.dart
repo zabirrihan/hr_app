@@ -8,9 +8,9 @@ import 'package:rxdart/rxdart.dart';
 class HolidayBloc {
   final Repository _repository = Repository();
 
-  final _holidayFetch = PublishSubject<HolidayModel>();
+  final _holidayFetch = PublishSubject<List<HolidayModel>>();
 
-  Stream<HolidayModel> get getAllHoliday => _holidayFetch.stream;
+  Stream<List<HolidayModel>> get getAllHoliday => _holidayFetch.stream;
 
   getHoliday() async {
     HttpResult response = await _repository.getAllHoliday();
@@ -18,9 +18,7 @@ class HolidayBloc {
       List<HolidayModel> data = holidayModelFromJson(
         json.encode(response.result),
       );
-      for(int i = 0; i < data.length; i ++) {
-        _holidayFetch.sink.add(data[i]);
-      }
+      _holidayFetch.sink.add(data);
     }
   }
 }
