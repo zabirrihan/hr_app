@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hr_app/src/api/repository.dart';
@@ -5,6 +7,9 @@ import 'package:hr_app/src/model/http_result.dart';
 import 'package:hr_app/src/theme/app_theme.dart';
 import 'package:hr_app/src/ui/main_screen/main_screen.dart';
 import 'package:hr_app/src/utils/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../model/login_model/home_model.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -165,13 +170,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 GestureDetector(
                   onTap: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+
                     HttpResult result = await _repository.loginApi(
                         _idController.text, _passwordController.text);
+
                     if (result.isSuccess) {
+                      List<HomeModel> data = homeModelFromJson(
+                        json.encode(result.result),
+                      );
+                      prefs.setString("userid", data[0].userData.userId);
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const MainScreen(),
+                          builder: (context) => MainScreen(
+                            data: result.result,
+                          ),
                         ),
                       );
                     } else {

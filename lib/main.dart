@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hr_app/src/ui/login/register_screen.dart';
 import 'package:hr_app/src/ui/main_screen/main_screen.dart';
 
 void main() {
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
       ),
-      home: const MainScreen(),
+      home: MainScreen(data: const [],),
     );
   }
 }

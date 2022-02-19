@@ -29,6 +29,7 @@ class _HolidaysScreenState extends State<HolidaysScreen> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 var data = snapshot.data;
+                print("Holidays: $data");
                 return ListView.builder(
                   itemCount: data!.length,
                   itemBuilder: (_, index) {

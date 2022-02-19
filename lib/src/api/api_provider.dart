@@ -11,9 +11,12 @@ class ApiProver {
   String baseUrl = "https://apps.acibd.com/apps/hrmatters/";
 
   static Future<HttpResult> _postUrl(String url, data) async {
+    // ignore: avoid_print
     print(url);
+    // ignore: avoid_print
     print(data);
     var header = await _header();
+    // ignore: avoid_print
     print(header);
     try {
       http.Response response = await http
@@ -96,8 +99,29 @@ class ApiProver {
   }
 
   Future<HttpResult> getAllBalance() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String id = prefs.getString("userid") ?? "0";
+    var data = {
+      "UserID": id,
+    };
     String url = baseUrl + "leave/statusdata";
-    return _getResponse(url);
+    return await _postUrl(
+      url,
+      data,
+    );
+  }
+
+  Future<HttpResult> getLeaves() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String id = prefs.getString("userid") ?? "0";
+    var data = {
+      "UserID": id,
+    };
+    String url = baseUrl + "applyto";
+    return await _postUrl(
+      url,
+      data,
+    );
   }
 
   Future<HttpResult> getAllHoliday() async {

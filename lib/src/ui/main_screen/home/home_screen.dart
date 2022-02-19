@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hr_app/src/model/login_model/home_model.dart';
 import 'package:hr_app/src/utils/utils.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  List<HomeModel> data;
+
+  HomeScreen({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();

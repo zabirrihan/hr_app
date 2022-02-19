@@ -1,6 +1,7 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hr_app/src/model/login_model/home_model.dart';
 import 'package:hr_app/src/theme/app_theme.dart';
 import 'package:hr_app/src/ui/main_screen/feedback/feedback_screen.dart';
 import 'package:hr_app/src/ui/main_screen/holidays/holidays_screen.dart';
@@ -10,7 +11,12 @@ import 'package:hr_app/src/ui/main_screen/notice/notice_screen.dart';
 import 'package:hr_app/src/utils/utils.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  List<HomeModel> data;
+
+  MainScreen({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -19,13 +25,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final PageController _controller = PageController(initialPage: 2);
   int currentIndex = 2;
-  final List<Widget> _pages = [
-    const NoticeScreen(),
-    const MyLeaveScreen(),
-    const HomeScreen(),
-    const FeedBackScreen(),
-    const HolidaysScreen(),
-  ];
 
   List<String> appTxt = [
     'Notice',
@@ -53,7 +52,15 @@ class _MainScreenState extends State<MainScreen> {
       body: PageView(
         controller: _controller,
         physics: const NeverScrollableScrollPhysics(),
-        children: _pages,
+        children: [
+          NoticeScreen(),
+          MyLeaveScreen(),
+          HomeScreen(
+            data: widget.data,
+          ),
+          FeedBackScreen(),
+          HolidaysScreen(),
+        ],
       ),
       bottomNavigationBar: ConvexAppBar(
         initialActiveIndex: 2,

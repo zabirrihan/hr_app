@@ -9,6 +9,8 @@ class Repository {
 
   Future<HttpResult> getAllHoliday() => apiProvider.getAllHoliday();
 
+  Future<HttpResult> getLeaves() => apiProvider.getLeaves();
+
   Future<HttpResult> getAllFeedback() => apiProvider.getAllFeedback();
 
   Future<HttpResult> loginApi(String id, String password) =>

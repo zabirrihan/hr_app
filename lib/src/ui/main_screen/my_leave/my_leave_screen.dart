@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hr_app/src/bloc/leaves_bloc.dart';
 import 'package:hr_app/src/model/leaves_model/balance_model.dart';
+import 'package:hr_app/src/model/leaves_model/leaves_model.dart';
 import 'package:hr_app/src/theme/app_theme.dart';
 import 'package:hr_app/src/ui/main_screen/my_leave/new_leave_screen.dart';
 import 'package:hr_app/src/utils/utils.dart';
@@ -22,6 +23,7 @@ class _MyLeaveScreenState extends State<MyLeaveScreen>
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
     balanceBloc.getBalance();
+    balanceBloc.getAllLeaves();
     super.initState();
   }
 
@@ -84,27 +86,43 @@ class _MyLeaveScreenState extends State<MyLeaveScreen>
                   stream: balanceBloc.getAllBalance,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      BalanceModel? data = snapshot.data;
+                      BalanceModel data = snapshot.data!;
+                      print("Balance: $data");
                       return LeaveWidget.balanceWidget(
                         context,
-                        data!,
+                        data,
                       );
                     } else {
-                      return const CircularProgressIndicator();
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: const [
+                          Center(child: CircularProgressIndicator()),
+                        ],
+                      );
                     }
                   },
                 ),
-                LeaveWidget.leavesWidget(
-                  context,
-                  "Leave type",
-                  "Feb 1, 2022 - Feb 3, 2022  2 days",
-                  "endDay",
-                  "Feb 2, 2022 10:30AM",
-                  "day",
-                  "link@example.com",
-                  "content",
-                  Colors.red,
+
+                StreamBuilder<LeavesModel>(
+                  stream: balanceBloc.getLeaves,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      LeavesModel data = snapshot.data!;
+                      print("Leaves: $data");
+                      return Container();
+                    } else {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: const [
+                          Center(child: CircularProgressIndicator()),
+                        ],
+                      );
+                    }
+                  },
                 ),
+
               ],
               controller: _tabController,
             ),
