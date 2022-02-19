@@ -96,7 +96,7 @@ class ApiProver {
   }
 
   Future<HttpResult> getAllBalance() async {
-    String url = baseUrl + "leave/statusdata?empcode=00001";
+    String url = baseUrl + "leave/statusdata";
     return _getResponse(url);
   }
 

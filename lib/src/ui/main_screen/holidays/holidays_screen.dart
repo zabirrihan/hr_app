@@ -13,12 +13,12 @@ class HolidaysScreen extends StatefulWidget {
 }
 
 class _HolidaysScreenState extends State<HolidaysScreen> {
-
   @override
   void initState() {
     holidayBloc.getHoliday();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +26,7 @@ class _HolidaysScreenState extends State<HolidaysScreen> {
         children: [
           StreamBuilder<List<HolidayModel>>(
             stream: holidayBloc.getAllHoliday,
-            builder: (context, AsyncSnapshot<List<HolidayModel>> snapshot) {
+            builder: (context, snapshot) {
               if (snapshot.hasData) {
                 var data = snapshot.data;
                 return ListView.builder(
@@ -41,7 +41,9 @@ class _HolidaysScreenState extends State<HolidaysScreen> {
                   },
                 );
               } else {
-                return const CircularProgressIndicator();
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               }
             },
           ),

@@ -15,6 +15,11 @@ class FeedBackScreen extends StatefulWidget {
 
 class _FeedBackScreenState extends State<FeedBackScreen> {
   @override
+  void initState() {
+    feedbackBloc.getFeedback();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.white,
@@ -25,6 +30,7 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
             builder: (context, AsyncSnapshot<FeedbackModel> snapshot) {
               if (snapshot.hasData) {
                 var data = snapshot.data;
+                print(data);
                 return ListView.builder(
                   itemCount: data!.feedbackData.length,
                   itemBuilder: (context, index) {

@@ -12,7 +12,7 @@ class FeedbackBloc {
 
   Stream<FeedbackModel> get getAllFeedback=> _feedbackFetch.stream;
 
-  getHoliday() async {
+  getFeedback() async {
     HttpResult response = await _repository.getAllHoliday();
     if (response.isSuccess) {
       FeedbackModel data = feedbackModelFromJson(
