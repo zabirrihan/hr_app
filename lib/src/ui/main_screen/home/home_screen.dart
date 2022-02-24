@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 Row(
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Container(
                           height: 45,
                           width: 45,
-                          margin: EdgeInsets.only(left: 48),
+                          margin: const EdgeInsets.only(left: 48),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(24),
                             child: Image.asset(
@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Container(
                           height: 45,
                           width: 45,
-                          margin: EdgeInsets.only(left: 24),
+                          margin: const EdgeInsets.only(left: 24),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(24),
                             child: Image.asset(
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Container(
                           height: 45,
                           width: 45,
-                          margin: EdgeInsets.only(left: 0),
+                          margin: const EdgeInsets.only(left: 0),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(24),
                             child: Image.asset(
@@ -110,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 16,
                     ),
                     Text(

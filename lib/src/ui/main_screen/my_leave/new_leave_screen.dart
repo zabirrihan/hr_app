@@ -298,7 +298,7 @@ class _NewLeaveScreenState extends State<NewLeaveScreen> {
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               SizedBox(
                 width: 16 * w,
               )

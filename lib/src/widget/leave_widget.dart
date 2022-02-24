@@ -9,11 +9,9 @@ class LeaveWidget {
     BuildContext context,
     BalanceModel data,
   ) {
-    double h = Utils.windowHeight(context);
     return ListView.builder(
       itemCount: data.data.length,
       itemBuilder: (context, index) {
-        var info = data.data[index];
         return balanceItem(
           context,
           data.data[0].indicator,

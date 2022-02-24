@@ -53,13 +53,13 @@ class _MainScreenState extends State<MainScreen> {
         controller: _controller,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          NoticeScreen(),
-          MyLeaveScreen(),
+          const NoticeScreen(),
+          const MyLeaveScreen(),
           HomeScreen(
             data: widget.data,
           ),
-          FeedBackScreen(),
-          HolidaysScreen(),
+          const FeedBackScreen(),
+          const HolidaysScreen(),
         ],
       ),
       bottomNavigationBar: ConvexAppBar(
