@@ -181,11 +181,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         json.encode(result.result),
                       );
                       prefs.setString("userid", data[0].userData.userId);
+                      prefs.setString("username", data[0].userData.userName);
+                      prefs.setString("design", data[0].userData.designation);
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) => MainScreen(
-                            data: result.result,
                           ),
                         ),
                       );

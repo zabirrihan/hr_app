@@ -19,11 +19,13 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
     feedbackBloc.getFeedback();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.white,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           StreamBuilder(
             stream: feedbackBloc.getAllFeedback,
@@ -44,7 +46,9 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                   },
                 );
               } else {
-                return const CircularProgressIndicator();
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               }
             },
           ),

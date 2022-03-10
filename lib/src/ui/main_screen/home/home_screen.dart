@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hr_app/src/model/login_model/home_model.dart';
 import 'package:hr_app/src/utils/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
-  List<HomeModel> data;
-
-  HomeScreen({
+  const HomeScreen({
     Key? key,
-    required this.data,
   }) : super(key: key);
 
   @override
@@ -15,6 +12,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String userName = "";
+  String design = "";
+
+  @override
+  void initState() {
+    get();
+    super.initState();
+  }
+
+  get() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    userName = preferences.getString("username") ?? "JM";
+    design = preferences.getString("design") ?? "FD";
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     double h = Utils.windowHeight(context);
@@ -53,13 +66,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Monarh Madaminov',
+                          userName,
                           textAlign: TextAlign.start,
                           style: Utils.style(
                               20 * h, 24, Colors.white, FontWeight.bold),
                         ),
                         Text(
-                          'Developer in Flutter',
+                          design,
                           textAlign: TextAlign.start,
                           style: Utils.style(
                               16 * h, 20, Colors.white, FontWeight.normal),

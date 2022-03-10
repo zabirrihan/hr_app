@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
       ),
-      home: MainScreen(data: const [],),
+      home: const MainScreen(),
     );
   }
 }

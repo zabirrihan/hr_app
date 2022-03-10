@@ -11,11 +11,9 @@ import 'package:hr_app/src/ui/main_screen/notice/notice_screen.dart';
 import 'package:hr_app/src/utils/utils.dart';
 
 class MainScreen extends StatefulWidget {
-  List<HomeModel> data;
 
-  MainScreen({
+  const MainScreen({
     Key? key,
-    required this.data,
   }) : super(key: key);
 
   @override
@@ -56,7 +54,6 @@ class _MainScreenState extends State<MainScreen> {
           const NoticeScreen(),
           const MyLeaveScreen(),
           HomeScreen(
-            data: widget.data,
           ),
           const FeedBackScreen(),
           const HolidaysScreen(),

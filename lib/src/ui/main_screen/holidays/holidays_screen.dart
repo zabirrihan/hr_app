@@ -23,6 +23,7 @@ class _HolidaysScreenState extends State<HolidaysScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           StreamBuilder<List<HolidayModel>>(
             stream: holidayBloc.getAllHoliday,
